@@ -56,8 +56,8 @@ const MoviePage = (props) => {
             </Grid>
           </Grid>
         </>
-      ) : (
-        <h2>Waiting for API data</h2>
+      ) : ( 
+      <h2>Waiting for API data</h2>
       )}
     </>
   );
