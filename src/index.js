@@ -11,7 +11,6 @@ import movieReviewPage from "./pages/movieReviewPage";
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import MoviesContextProvider from "./contexts/moviesContext";
-import AddMovieReviewPage from './pages/addMovieReviewPage'
 
 const queryClient = new QueryClient({
   defaultOptions: {
