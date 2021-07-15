@@ -21,28 +21,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MovieHeader = ( { movie, history}) => {
-  const classes = useStyles();
-
-  return (
-    <Paper component="div" className={classes.root}>
-      <IconButton aria-label="go back" onClick={() => history.goBack()} >
-        <ArrowBackIcon color="primary" fontSize="large" />
-      </IconButton>
-
-      <Typography variant="h4" component="h3">
-        {movie.title}
-        <a href={movie.homepage}>
-          <HomeIcon color="primary" />
-        </a>
-        <br />
-        <span className={classes.tagLine}>{`   "${movie.tagline}"`} </span>
-      </Typography>
-      <IconButton aria-label="go forward" onClick={() => history.goForward() } >
-        <ArrowForwardIcon color="primary" fontSize="large" />
-      </IconButton>
-    </Paper>
-  );
-};
-
-export default withRouter(MovieHeader);
+const MovieHeader = ( { movie, history }) => {
+    const classes = useStyles();
+  
+    return (
+      <Paper component="div" className={classes.root}>
+        <IconButton aria-label="go back" onClick={() => history.goBack()} >
+          <ArrowBackIcon color="primary" fontSize="large" />
+        </IconButton>
+  
+        <Typography variant="h4" component="h3">
+          {movie.title}
+          <a href={movie.homepage}>
+            <HomeIcon color="primary" />
+          </a>
+          <br />
+          <span className={classes.tagLine}>{`   "${movie.tagline}"`} </span>
+        </Typography>
+        <IconButton aria-label="go forward" onClick={() => history.goForward()} >
+          <ArrowForwardIcon color="primary" fontSize="large" />
+        </IconButton>
+      </Paper>
+    );
+  };
+  
+  export default withRouter(MovieHeader);
