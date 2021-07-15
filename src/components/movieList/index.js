@@ -1,5 +1,5 @@
 import React from "react";
-import Movie from "../movieCard/";
+import Movie from "../movieCard";
 import Grid from "@material-ui/core/Grid";
 
 const MovieList = ( {movies, action }) => {
@@ -10,4 +10,5 @@ const MovieList = ( {movies, action }) => {
   ));
   return movieCards;
 };
+
 export default MovieList;
