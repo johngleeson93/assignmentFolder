@@ -31,7 +31,8 @@ const App = () => {
       <BrowserRouter>
         <SiteHeader />
         <MoviesContextProvider>
-          <Switch>
+            {" "}
+            <Switch>
           <Route exact path="/reviews/form" component={AddMovieReviewPage} />
           <Route path="/reviews/:id" component={movieReviewPage} />
           <Route exact path="/movies/upcoming" component={UpcomingMoviesPage} />
@@ -39,9 +40,9 @@ const App = () => {
           <Route path="/movies/:id" component={MoviePage} />
           <Route path="/" component={HomePage} />
           <Redirect from="*" to="/" />
-        </Switch>
+          </Switch>
         </MoviesContextProvider>
-        </BrowserRouter>
+      </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
