@@ -1,102 +1,104 @@
-import React, { useContext  } from "react";
-import { MoviesContext } from "../../contexts/moviesContext";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardHeader from "@material-ui/core/CardHeader";
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+import React, { useState } from "react";
+import Chip from "@material-ui/core/Chip";
+import Paper from "@material-ui/core/Paper";
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import MonetizationIcon from "@material-ui/icons/MonetizationOn";
+import StarRate from "@material-ui/icons/StarRate";
+import NavigationIcon from "@material-ui/icons/Navigation";
+import Fab from "@material-ui/core/Fab";
 import Typography from "@material-ui/core/Typography";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import CalendarIcon from "@material-ui/icons/CalendarTodayTwoTone";
-import StarRateIcon from "@material-ui/icons/StarRate";
-import Grid from "@material-ui/core/Grid";
-import img from "../../images/film-poster-placeholder.png";
-import { Avatar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import MovieReviews from "../movieReviews";
 
-const useStyles = makeStyles({
-  card: { maxWidth: 345 },
-  media: { height: 500 },
-  avatar: {
-    backgroundColor: "rgb(255, 0, 0)",
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    listStyle: "none",
+    padding: theme.spacing(1.5),
+    margin: 0,
   },
-});
+  chip: {
+    margin: theme.spacing(0.5),
+  },
+  fab: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+}));
 
-export default function MovieCard({ movie, action }) {
+const MovieDetails = ({ movie }) => {
   const classes = useStyles();
-  const { favorites, addToFavorites } = useContext(MoviesContext);
-
-  if (favorites.find((id) => id === movie.id)) {
-    movie.favorite = true;
-  } else {
-    movie.favorite = false
-  }
-
-  const handleAddToFavorite = (e) => {
-    e.preventDefault();
-    addToFavorites(movie);
-  };
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
-    <Card className={classes.card}>
-      <CardHeader
-        className={classes.header}
-        avatar={
-          movie.favorite ? (
-            <Avatar className={classes.avatar}>
-              <FavoriteIcon />
-            </Avatar>
-          ) : null
-        }
-        title={
-          <Typography variant="h5" component="p">
-            {movie.title}{" "}
-          </Typography>
-        }
-      />
+    <>
+      <Typography variant="h5" component="h3">
+        Overview
+      </Typography>
 
-      <CardMedia
-        className={classes.media}
-        image={
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-            : img
-        }
-      />
-      <CardContent>
-        <Grid container>
-          <Grid item xs={6}>
-            <Typography variant="h6" component="p">
-              <CalendarIcon fontSize="small" />
-              {movie.release_date}
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6" component="p">
-              <StarRateIcon fontSize="small" />
-              {"  "} {movie.vote_average}{" "}
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6" component="p">
-              <StarRateIcon fontSize="small" />
-              {`vote count: ${movie.vote_count}`}
-            </Typography>
-          </Grid>
-        </Grid>
-      </CardContent>
-      <CardActions disableSpacing>
-        {action(movie)}
-          <Link to={`/movies/${movie.id}`}>
-              <Button variant="outlined" size="medium" color="primary">
-                  More Info ...
-              </Button>
-          </Link>
-      </CardActions>
-    </Card>
+      <Typography variant="h6" component="p">
+        {movie.overview}
+      </Typography>
+
+      <Paper component="ul" className={classes.root}>
+        <li>
+          <Chip label="Genres" className={classes.chip} color="primary" />
+        </li>
+        {movie.genres.map((g) => (
+          <li key={g.name}>
+            <Chip label={g.name} className={classes.chip} />
+          </li>
+        ))}
+      </Paper>
+      <Paper component="ul" className={classes.root}>
+        <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
+        <Chip
+          icon={<MonetizationIcon />}
+          label={`${movie.revenue.toLocaleString()}`}
+        />
+        <Chip
+          icon={<StarRate />}
+          label={`${movie.vote_average} (${movie.vote_count}`}
+        />
+        <Chip label={`Released: ${movie.release_date}`} />
+      </Paper>
+
+      <Paper component="ul" className={classes.root}>
+        <li>
+          <Chip
+            label="Production Countries"
+            className={classes.chip}
+            color="primary"
+          />
+        </li>
+        {movie.production_countries.map((p) => (
+          <li key={p.name}>
+            <Chip label={p.name} className={classes.chip} />
+          </li>
+        ))}
+      </Paper>
+      <Fab
+        color="secondary"
+        variant="extended"
+        onClick={() => setDrawerOpen(true)}
+        className={classes.fab}
+      >
+        <NavigationIcon />
+        Reviews
+      </Fab>
+      <Drawer
+        anchor="top"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
+        <MovieReviews movie={movie} />
+      </Drawer>
+    </>
   );
 };
 
-export {MovieCard};
+export default MovieDetails;

@@ -24,17 +24,17 @@ const TemplateMoviePage = ({ movie, children }) => {
   const classes = useStyles();
   const { data , error, isLoading, isError } = useQuery(
     ["images", { id: movie.id }],
-    getMovieImages
+    getMovieImages,
   );
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner />
+  }
+  if(isError) {
+    return <h1>{error.message}</h1>
   }
 
-  if (isError) {
-    return <h1>{error.message}</h1>;
-  }
-  const images = data.posters 
+  const images = data.posters;
 
   return (
     <>

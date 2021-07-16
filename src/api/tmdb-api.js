@@ -9,7 +9,7 @@ export const getMovies = async () => {
 };
   
 export const getMovie = async ( args ) => {
-  // console.log(args)
+  // console.log(args);
   // eslint-disable-next-line no-unused-vars
   const [prefix, { id }] = args.queryKey;
   const response = await fetch(
@@ -22,17 +22,18 @@ export const getMovie = async ( args ) => {
 };
   
 export const getGenres = async () => {
-  const response = await  fetch(
+  const response = await fetch(
     "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
       process.env.REACT_APP_TMDB_KEY +
       "&language=en-US"
   )
-  if (!response.ok) {
+  if(!response.ok) {
     throw new Error(response.json().message);
   }
+
   return response.json();
 };
-  
+
 export const getMovieImages = async ({queryKey}) => {
   // eslint-disable-next-line no-unused-vars
   const [prefix, { id }] = queryKey;
@@ -45,22 +46,25 @@ export const getMovieImages = async ({queryKey}) => {
   return response.json();
 };
 
-  export const getCountries = () => {
-    return fetch(
-      "https://api.themoviedb.org/3/countries/movie/list?api_key=" +
-        process.env.REACT_APP_TMDB_KEY +
-        "&language=en-US"
-    )
-      .then(res => res.json())
-      .then(json => json.countries);
-  };
-  export const getMovieReviews = (id) => {
-    return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        // console.log(json.results);
-        return json.results;
-      });
-  };
+export const getMovieReviews = (id) => {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  )
+    .then((res) => res.json())
+    .then((json) => {
+      //console.log(json.results);
+      return json.results;
+    });
+};
+
+
+export const getUpcomingMovies = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  )
+  if (!response.ok) {
+    throw new Error(response.json().message);
+  }
+  return response.json();
+};
+
