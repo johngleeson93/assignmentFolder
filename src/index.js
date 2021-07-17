@@ -12,7 +12,6 @@ import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import MoviesContextProvider from "./contexts/moviesContext";
 
-/* Query Client will manage the cache in the browser */
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -23,9 +22,6 @@ const queryClient = new QueryClient({
   },
 });
 
-/* note:
-      whenever routing configuration changes are made you must restart the development server.
-*/
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
