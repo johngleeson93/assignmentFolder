@@ -1,20 +1,20 @@
 import React, { useContext } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
 import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import MoodBadIcon from '@material-ui/icons/MoodBad';
 
-const AddToFavoritesIcon = ({ movie }) => {
+const MoodBadIcon = ({ movie }) => {
   const context = useContext(MoviesContext);
 
-  const handleAddToFavorites = (e) => {
+  const handleAddToWorst = (e) => {
     e.preventDefault();
-    context.addToFavorites(movie);
+    context.addToWorst(movie);
   };
   return (
-    <IconButton aria-label="add to favorites" onClick={handleAddToFavorites}>
+    <IconButton aria-label="add to Worst" onClick={handleAddToWorst}>
       <FavoriteIcon color="primary" fontSize="large" />
     </IconButton>
   );
 };
 
-export default AddToFavoritesIcon;
+export default MoodBadIcon;
