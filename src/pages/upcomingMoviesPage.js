@@ -3,7 +3,7 @@ import PageTemplate from '../components/templateMovieListPage';
 import { getUpcomingMovies } from "../api/tmdb-api";
 import Spinner from '../components/spinner';
 import { useQuery } from 'react-query';
-import AddToMustWatchIcon from "../components/cardIcons/addToWatchList";
+import AddToMustWatchIcon from "../components/cardIcons/addToFavorites";
 
 const UpcomingMoviesPage = (props) => {
  
