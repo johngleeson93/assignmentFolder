@@ -12,7 +12,9 @@
     "react-hook-form": "^3.29.4",
     "react-query": "^3.13.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.1"
+    "react-scripts": "^4.0.1",
+    "storybook": "^6.3.6",
+    "yarn": "^1.22.11"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006 -s public",
@@ -46,6 +48,6 @@
     "@storybook/addon-links": "^6.2.9",
     "@storybook/node-logger": "^6.2.9",
     "@storybook/preset-create-react-app": "^1.2.0",
-    "@storybook/react": "^3.4.12"
+    "@storybook/react": "^6.2.9"
   }
 }
