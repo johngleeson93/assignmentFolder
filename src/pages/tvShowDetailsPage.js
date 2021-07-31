@@ -6,6 +6,7 @@ import { getTvShow } from "../api/tmdb-api";
 import { withRouter } from "react-router-dom";
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner';
+import SeasonList from "../components/seasonList";
 
 const TvShowDetailsPage = (props) => {
   //const id allows the component to extract the tvShow id from the browser's parameterized URL address
@@ -31,6 +32,7 @@ const TvShowDetailsPage = (props) => {
         <>
           <PageTemplate tvShow={tvShow}>
             <TvShowDetails tvShow={tvShow} />
+            <SeasonList numberOfSeasons = {tvShow.number_of_seasons}/>
           </PageTemplate>
         </>
       ) : (
