@@ -77,12 +77,9 @@ export const getTopRatedMovies = async () => {
   }
   return response.json();
 };
-export const getTvShows = async ( args ) => {
-  // console.log(args);
-  // eslint-disable-next-line no-unused-vars
-  const [prefix, { id }] = args.queryKey;
+export const getTvShows = async () => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/tv/latest/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
   );
   if (!response.ok) {
     throw new Error(response.json().message);
