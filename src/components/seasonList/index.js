@@ -6,6 +6,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { number } from 'prop-types';
+import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SeasonList( {numberOfSeasons} ) {
     const classes = useStyles();
+    let { id } = useParams();
     const [selectedIndex, setSelectedIndex] = React.useState(1);
 
     const handleListItemClick = (event, index) => {
@@ -27,7 +29,8 @@ export default function SeasonList( {numberOfSeasons} ) {
 
     for (let n = 1; n<=numberOfSeasons; n++){
         let label = `Season ${n}`;
-        seasonItems.push(<>
+        let link = `/tvShows/${id}/season/${n}`;
+        seasonItems.push(<a href={link}>
                 <ListItem
                     button
                     selected={selectedIndex === n}
@@ -36,7 +39,7 @@ export default function SeasonList( {numberOfSeasons} ) {
                     <ListItemText primary={label} />
                 </ListItem>
                 <Divider></Divider>
-                </>)
+                </a>)
     };
 
 
